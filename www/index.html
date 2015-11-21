@@ -73,7 +73,7 @@
 
     <div data-role="content" style="padding:0" id="mainbody" role="main">
 
-      <div class="ui-grid-b bigbtn" class="buttonactions">
+      <div class="ui-grid-b bigbtn buttonactions" >
         <div class="ui-block-a"><button  data-theme="f">G</button></div>
         <div class="ui-block-b"><button  data-theme="f">4</button></div>
         <div class="ui-block-c"><button  data-theme="f">6</button></div>
@@ -133,7 +133,7 @@
         </h6>                
       </div><!--eof footer--> 
 
-      
+
     </div><!--eof content--> 
 
 
@@ -277,14 +277,11 @@
                
             //document.addEventListener("deviceready", onDeviceReady, true);
             
-            $( "buttonactions.button" ).bind( "taphold", tapholdHandler ); 
+            $( ".buttonactions button" ).bind( "taphold", tapholdHandler ); 
             function tapholdHandler( event ){
             $.mobile.changePage( "buttons.html", { transition: "slideup", changeHash: false });
             //$( event.target ).addClass( "taphold" );
-            }
-
-        
-              
+            }            
 
 
 
