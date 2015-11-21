@@ -65,51 +65,48 @@ var app = {
 
     populateDB: function(tx) {
          //SALES
-         
-         tx.executeSql('CREATE TABLE IF NOT EXISTS SALES (id unique, tableid,date,ispaid,checkoutid)');
+         /*tx.executeSql('DROP TABLE IF EXISTS SALES');
+         tx.executeSql('DROP TABLE IF EXISTS CHECKOUT');
+         tx.executeSql('DROP TABLE IF EXISTS BUTTONCOLORS');
+         tx.executeSql('DROP TABLE IF EXISTS ITEMS');
+         tx.executeSql('DROP TABLE IF EXISTS EXTRA');
+         */
+
+         tx.executeSql('CREATE TABLE IF NOT EXISTS SALES (id unique, itemid,date,ispaid,checkoutid,isextra)');
          //CHECKOUT
-        
+         
          tx.executeSql('CREATE TABLE IF NOT EXISTS CHECKOUT (id unique,date,amountpaid,tips)');
          //BUTTONCOLORS
          
          tx.executeSql('CREATE TABLE IF NOT EXISTS BUTTONCOLORS (id unique,color)');
-         //BUTTONS
          
-         tx.executeSql('CREATE TABLE IF NOT EXISTS BUTTONS (id unique,colorid,description,price)');
          //ITEMS
-        
-         tx.executeSql('CREATE TABLE IF NOT EXISTS ITEMS (id unique,number,buttonid)');
+         
+         tx.executeSql('CREATE TABLE IF NOT EXISTS ITEMS (id unique,number,buttoncolorid,price,description)');
          //extra
          
-         tx.executeSql('CREATE TABLE IF NOT EXISTS EXTRA (id unique,price,quantity,date)');
-         //INSERT DEFAULT DATA
-         /*
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (1, "1")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (2, "2")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (3, "3")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (4, "4")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (5, "5")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (6, "6")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (7, "7")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (8, "8")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (9, "9")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (10, "10")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (11, "11")');
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (12, "12")');*/
-
+         tx.executeSql('CREATE TABLE IF NOT EXISTS EXTRA (id unique,description,price,quantity,date)');
          //query result
-         tx.executeSql('SELECT * FROM ITEMS', [], app.querySuccess, app.errorCB);
-
+         //tx.executeSql('SELECT * FROM ITEMS', [], app.querySuccess, app.errorCB);
+         tx.executeSql('SELECT * FROM BUTTONCOLORS', [], app.querySuccess, app.errorCB);
 
     },
 
     querySuccess:function(tx, results) {
     var len = results.rows.length;
+    //alert(len);
     if(len==0){    
          for (var i=1; i<=24; i++){
-         tx.executeSql('INSERT INTO ITEMS (id, number) VALUES ('+i+', "'+i+'")');       
+           tx.executeSql('INSERT INTO ITEMS (id, number) VALUES ('+i+', "'+i+'")');       
         }
+        //insert colors
+        var colors=["#3e80bd","#515151","#15ab16","#bf0f11","#d4d12a","#c7893c","#e66d04","#c42cf9"];
+        for (var i=0; i<colors.length; i++){
+            tx.executeSql('INSERT INTO BUTTONCOLORS (id, color) VALUES ('+(i+1)+', "'+colors[i]+'")');
+        }
+
     }
+
     app.loadButtons(len,results);
 
 },
@@ -119,6 +116,7 @@ var app = {
         console.log("ITEMS table: " + len + " rows found.");
         for (var i=0; i<len; i++){
             //alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).number);
+            //alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).color);
         }
     },
     // Transaction error callback
