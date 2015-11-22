@@ -40,6 +40,10 @@
   <gap:plugin name="org.apache.cordova.network-information"/>
   <gap:plugin name="org.apache.cordova.splashscreen"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
+  <gap:plugin name="Storage" value="org.apache.cordova.Storage" />
+
+
+
   <icon src="icon.png"/>
   <icon src="www/res/icon/android/icon-36-ldpi.png" gap:platform="android" gap:qualifier="ldpi"/>
   <icon src="www/res/icon/android/icon-48-mdpi.png" gap:platform="android" gap:qualifier="mdpi"/>
@@ -92,6 +96,9 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
   </platform>
+
+
+<feature id="blackberry.widgetcache" required="true" version="1.0.0.0" />
 
 <!-- for iOS -->
 <feature name="Toast">

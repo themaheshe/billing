@@ -101,10 +101,13 @@
         <div class="ui-block-b">
           <button id="equal-buttonmain" style="white-space:normal;" data-theme="a">Zur Kasse</button>
         </div>
-        <div class="ui-block-c">
-          
-          <a data-rel="popup" href="#extrapopup" data-role="button">Extra</a>
+        
+          <div class="ui-block-c">
+          <button class="extrabtn equal-button" data-role="button" data-rel="popup" data-theme="a">Extra</button>
+          <!--<a data-rel="popup" href="#extrapopup" data-role="button">Extra</a>-->
         </div>
+          
+        
       </div><!-- /grid-b -->
 
       
@@ -135,7 +138,6 @@
 
 
     </div><!--eof content--> 
-
 
 
 <!--extra page popup-->    
@@ -276,7 +278,11 @@
                 //alert('ready');
                
             //document.addEventListener("deviceready", onDeviceReady, true);
-            
+            $('button.extrabtn').on("click",function(){
+                $( "#extrapopup" ).popup( "open");
+            });
+
+
             $( ".buttonactions button" ).bind( "taphold", tapholdHandler ); 
             function tapholdHandler( event ){
             $.mobile.changePage( "buttons.html", { transition: "slideup", changeHash: false });
