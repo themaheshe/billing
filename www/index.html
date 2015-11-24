@@ -20,278 +20,336 @@
     under the License.
 -->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-
-  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
-  <link rel="stylesheet" type="text/css" href="css/custom.css" />
-  
-
-        <title>Billing App</title>
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <title>Billing App</title>
+</head>
+<body>
 
 
-     <!--application-->
-   <div data-role="page" id="mainpage">
-<!--
-    <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push">
-      <ul data-role="listview">
-      <li><a class="ui-btn-icon-left ui-btn ui-icon-home" href="#">Home</a></li>
-      <li><a class="ui-btn-icon-left ui-btn ui-icon-carat-l" href="#">Menu1</a></li>
-      <li><a class="ui-btn-icon-left ui-btn ui-icon-carat-l" href="#">Menu2</a></li>
-      </ul>
-    </div>
--->
-    <div data-role="header" style="border-bottom:4px solid #418d9f;">
-      <a data-iconpos="notext" data-role="button" data-icon="phone" title="Home">Home</a>
-      <h1>Kasee</h1>
-      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
-    </div>
-
-    <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">  
-      <div data-role="fieldcontain" class="navigation-second">
-        <div data-role="controlgroup"  class="topsecond-btns" style="float:left;width:65%" data-type="horizontal">
-          <a href="sales_statistics.html"  data-role="button" data-transition="slide" class="ui-btnsmall" data-icon="calendar"  data-iconpos="notext" data-role="button">Yes</a>
-          <a href="index.html" class="ui-btnsmall" data-icon="user"  data-iconpos="notext" data-role="button">Yes</a>
-          <a href="index.html" class="ui-btnsmall" data-icon="info"  data-iconpos="notext" data-role="button">Yes</a>
-          <a href="index.html" class="ui-btnsmall" data-icon="shop"  data-iconpos="notext" data-role="button">Yes</a>
-        </div>
-      <p style="float:left;text-align:right;width:30%;padding-right:5%">$ 0,00 </p>  
-      </div>
-    </div>
-
-    <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">      
-      <h1>Infoleiste</h1>    
-    </div>
-
-    <div data-role="content" style="padding:0" id="mainbody" role="main">
-
-      <div class="ui-grid-b bigbtn buttonactions" >
-        <div class="ui-block-a"><button  data-theme="f">G</button></div>
-        <div class="ui-block-b"><button  data-theme="f">4</button></div>
-        <div class="ui-block-c"><button  data-theme="f">6</button></div>
-      </div><!-- /grid-b -->
-      <div class="ui-grid-b bigbtn">
-        <div class="ui-block-a"><button  data-theme="f">1</button></div>
-        <div class="ui-block-b"><button  data-theme="f">3</button></div>
-        <div class="ui-block-c"><button  data-theme="f">4</button></div>
-      </div><!-- /grid-b -->
-      <div class="ui-grid-b bigbtn">
-        <div class="ui-block-a"><button  data-theme="f">2</button></div>
-        <div class="ui-block-b"><button  data-theme="f">6</button></div>
-        <div class="ui-block-c"><button  data-theme="f">9</button></div>
-      </div><!-- /grid-b -->
-      <div class="ui-grid-b bigbtn">
-        <div class="ui-block-a"><button  data-theme="f">32</button></div>
-        <div class="ui-block-b"><button  data-theme="f">56</button></div>
-        <div class="ui-block-c"><button  data-theme="f">49</button></div>
-      </div><!-- /grid-b -->
-
-      <div class="ui-grid-b footerbuttons">
-        <div class="ui-block-a">
-          <button class="equal-button" data-theme="a">Kunde</button>
-        </div>
-        <div class="ui-block-b">
-          <button id="equal-buttonmain" style="white-space:normal;" data-theme="a">Zur Kasse</button>
-        </div>
-        
-          <div class="ui-block-c">
-          <button class="extrabtn equal-button" data-role="button" data-rel="popup" data-theme="a">Extra</button>
-          <!--<a data-rel="popup" href="#extrapopup" data-role="button">Extra</a>-->
-        </div>
-          
-        
-      </div><!-- /grid-b -->
-
-      
-
-      <div data-theme="a" data-role="footer" data-position="fixed">
-        <div style="background-color:#2e2e2e;border-bottom:4px solid #333333;">      
-         
-          <a style="width:100%;" data-role="button" href="#nextpage" data-role="button" data-transition="slide">
-           next<!--Nacheste Seite-->
-          </a>
-            
-        </div>
-
-        <h6>
-          <div class="ui-grid-b">
-            <div class="ui-block-a" style="text-align: left;"> 
-              <a data-role="button" data-transition="slide" data-rel="back" class="ui-block-a" data-icon="arrow-l" data-iconpos="notext" data-rel="back" data-role="button">back</a>
-            </div>
-            <div class="ui-block-b" style="text-align: center;"> 
-              <a href="index.html" class="ui-block-b" style="margin;left:30%" data-icon="refresh"  data-iconpos="notext" data-role="button">refresh</a>
-            </div>
-            <div class="ui-block-c" style="text-align: right;">
-              <a style="float:right" href="index.html" class="ui-block-c" data-icon="back"  data-iconpos="notext right" data-role="button">Yes</a>
-            </div>                
-          </div><!-- /grid-a -->
-        </h6>                
-      </div><!--eof footer--> 
-
-
-    </div><!--eof content--> 
-
-
-<!--extra page popup-->    
-<div data-role="popup" id="extrapopup" data-theme="a" class="ui-corner-all">
-    <form>
-        <div style="padding:10px 20px;">
-            <h3>Extra</h3>
-            <label for="un" class="ui-hidden-accessible">Description</label>
-            <input name="user" id="un" value="" placeholder="description" data-theme="a" type="text">
-            <label for="amount" class="ui-hidden-accessible">Amount</label>
-            <input name="amount" id="pw" value="" placeholder="amount" data-theme="a" type="text">
-            <label for="price" class="ui-hidden-accessible">Price</label>
-            <input name="price" id="price" value="" placeholder="price" data-theme="a" type="text">
-            <button type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">OK</button>
-            <button type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-d ui-btn-icon-left ui-icon-delete">CANCEL</button>
-        </div>
-    </form>
-</div>
-<!--eof extra page popup-->
-
-
-</div><!--eof mainpage--> 
-
-<!--next page-->
-<div data-role="page" id="nextpage">
-
-<!--
-    <div data-role="panel" id="panel" data-position="right" data-theme="a" data-display="push">
-      <ul data-role="listview">
-      <li><a class="ui-btn-icon-left ui-btn ui-icon-home" href="#">Home</a></li>
-      <li><a class="ui-btn-icon-left ui-btn ui-icon-carat-l" href="#">Menu1</a></li>
-      <li><a class="ui-btn-icon-left ui-btn ui-icon-carat-l" href="#">Menu2</a></li>
-      </ul>
-    </div>
--->
-    <div data-role="header" style="border-bottom:4px solid #418d9f;">
-      <a data-iconpos="notext" data-role="button" data-icon="phone" title="Home">Home</a>
-      <h1>Kasee</h1>
-      <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
-    </div>
-
-    <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">  
-      <div data-role="fieldcontain" class="navigation-second">
-        <div data-role="controlgroup"  class="topsecond-btns" style="float:left;width:65%" data-type="horizontal">
-          <a href="index.html" class="ui-btnsmall" data-icon="calendar"  data-iconpos="notext" data-role="button">Yes</a>
-          <a href="index.html" class="ui-btnsmall" data-icon="user"  data-iconpos="notext" data-role="button">Yes</a>
-          <a href="index.html" class="ui-btnsmall" data-icon="info"  data-iconpos="notext" data-role="button">Yes</a>
-          <a href="index.html" class="ui-btnsmall" data-icon="shop"  data-iconpos="notext" data-role="button">Yes</a>
-        </div>
-      <p style="float:left;text-align:right;width:30%;padding-right:5%">$ 0,00 </p>  
-      </div>
-    </div>
-
-    <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">      
-      <h1>Infoleiste</h1>      
-    </div>
-<!--eof header-->
-
-<div data-role="content" style="padding:0" id="nextpagebody" role="main">
-<div class="ui-grid-b bigbtn" class="buttonactions">
-      <div class="ui-block-a"><button  data-theme="f">13</button></div>
-      <div class="ui-block-b"><button  data-theme="f">14</button></div>
-      <div class="ui-block-c"><button  data-theme="f">16</button></div>
-    </div><!-- /grid-b -->
-    <div class="ui-grid-b bigbtn">
-      <div class="ui-block-a"><button  data-theme="f">1</button></div>
-      <div class="ui-block-b"><button  data-theme="f">3</button></div>
-      <div class="ui-block-c"><button  data-theme="f">4</button></div>
-    </div><!-- /grid-b -->
-    <div class="ui-grid-b bigbtn">
-      <div class="ui-block-a"><button  data-theme="f">2</button></div>
-      <div class="ui-block-b"><button  data-theme="f">6</button></div>
-      <div class="ui-block-c"><button  data-theme="f">9</button></div>
-    </div><!-- /grid-b -->
-     <div class="ui-grid-b bigbtn">
-      <div class="ui-block-a"><button  data-theme="f">32</button></div>
-      <div class="ui-block-b"><button  data-theme="f">56</button></div>
-      <div class="ui-block-c"><button  data-theme="f">49</button></div>
-    </div><!-- /grid-b -->
-    <div class="ui-grid-b footerbuttons">
-        <div class="ui-block-a">
-          <button class="equal-button" data-theme="a">Kunde</button>
-        </div>
-        <div class="ui-block-b">
-          <button id="equal-buttonmain" style="white-space:normal;" data-theme="a">Zur Kasse</button>
-        </div>
-        <div class="ui-block-c">
-          <button class="equal-button" data-theme="a">Extra</button>
-        </div>
-      </div><!-- /grid-b -->
-</div>
-<!--eof content-->
-<!--footer-->
-      <div data-theme="a" data-role="footer" data-position="fixed">
-        <div style="background-color:#2e2e2e;border-bottom:4px solid #333333;">      
-          
-          <a style="width:100%;" data-role="button" href="#mainpage" data-role="button" data-transition="slide">
-           Previous<!--Nacheste Seite-->
-          </a>
-             
-        </div>
-
-        <h6>
-          <div class="ui-grid-b">
-            <div class="ui-block-a" style="text-align: left;"> 
-              <a href="#" class="ui-block-a" data-icon="arrow-l" data-iconpos="notext" data-rel="back" data-role="button">back</a>
-            </div>
-            <div class="ui-block-b" style="text-align: center;"> 
-              <a href="index.html" class="ui-block-b" style="margin;left:30%" data-icon="refresh"  data-iconpos="notext" data-role="button">refresh</a>
-            </div>
-            <div class="ui-block-c" style="text-align: right;">
-              <a style="float:right" href="index.html" class="ui-block-c" data-icon="back"  data-iconpos="notext right" data-role="button">Yes</a>
-            </div>                
-          </div><!-- /grid-a -->
-        </h6>                
-      </div><!--eof footer--> 
-
-</div>
-<!--EOF next page-->
-
-
-
-
-
-
+    <!--application-->
+    <div data-role="page" id="main-page">
      
-  <div id="highlight"> </div>
-  
-     <!--EOF application-->
-        <script src="js/jquery.js"></script>
-        <script src="js/jquery.mobile-1.4.0-rc.1.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <!--<script type="text/javascript" src="js/Toast.js"></script>-->
+        <div data-role="header" style="border-bottom:4px solid #418d9f;">
+            <a data-iconpos="notext" data-role="button" data-icon="phone" title="Home">Home</a>
+            <h1>Kasee</h1>
+            <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
+        </div>
 
-            <script>
+        <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">
+            <div data-role="fieldcontain" class="navigation-second">
+                <div data-role="controlgroup" class="topsecond-btns" style="float:left;width:65%" data-type="horizontal">
+                    <a href="sales_statistics.html" data-role="button" data-transition="slide" class="ui-btnsmall" data-icon="calendar" data-iconpos="notext" data-role="button">Yes</a>
+                    <a href="index.html" class="ui-btnsmall" data-icon="user" data-iconpos="notext" data-role="button">Yes</a>
+                    <a href="index.html" class="ui-btnsmall" data-icon="info" data-iconpos="notext" data-role="button">Yes</a>
+                    <a href="index.html" class="ui-btnsmall" data-icon="shop" data-iconpos="notext" data-role="button">Yes</a>
+                </div>
+                <p style="float:left;text-align:right;width:30%;padding-right:5%"><!--ko text:cartAmount --><!--/ko--></p>
+            </div>
+        </div>
+
+        <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">
+            <h1>Infoleiste</h1>
+        </div>
+
+        <div data-role="content" style="padding:0" id="mainbody" role="main">
+
+            <!--ko foreach:_items-->
+              <div class="ui-grid-b bigbtn" data-bind="foreach:$data">
+                <div data-bind="attr:{ 'class' : $index() == 0 ? 'ui-block-a' : ( $index() == 1 ? 'ui-block-b' : 'ui-block-c' )}">
+                <button data-theme="f" data-bind="click:$root.addItem,text:ButtonCaption,attr:{'class' : ButtonClass}"></button></div>           
+              </div>
+            <!--/ko-->
+          
+
+            <div class="ui-grid-b footerbuttons">
+                <div class="ui-block-a">
+                    <button class="equal-button" data-theme="a">Kunde</button>
+                </div>
+                <div class="ui-block-b">
+                    <button id="equal-buttonmain" style="white-space:normal;" data-theme="a" data-bind="click:checkOut">Zur Kasse</button>
+                </div>
+
+                <div class="ui-block-c">
+                    <button class="extrabtn equal-button" data-role="button" data-rel="popup" data-theme="a">Extra</button>
+                    <!--<a data-rel="popup" href="#extrapopup" data-role="button">Extra</a>-->
+                </div>
+
+
+            </div><!-- /grid-b -->
+
+
+
+            <div data-theme="a" data-role="footer" data-position="fixed">
+                <div style="background-color:#2e2e2e;border-bottom:4px solid #333333;">
+
+                    <a style="width:100%;" data-role="button" href="#nextpage" data-role="button" data-transition="slide">
+                        next<!--Nacheste Seite-->
+                    </a>
+
+                </div>
+
+                <h6>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a" style="text-align: left;">
+                            <a data-role="button" data-transition="slide" data-rel="back" class="ui-block-a" data-icon="arrow-l" data-iconpos="notext" data-rel="back" data-role="button">back</a>
+                        </div>
+                        <div class="ui-block-b" style="text-align: center;">
+                            <a href="index.html" class="ui-block-b" style="margin;left:30%" data-icon="refresh" data-iconpos="notext" data-role="button">refresh</a>
+                        </div>
+                        <div class="ui-block-c" style="text-align: right;">
+                            <a style="float:right" href="index.html" class="ui-block-c" data-icon="back" data-iconpos="notext right" data-role="button">Yes</a>
+                        </div>
+                    </div><!-- /grid-a -->
+                </h6>
+            </div><!--eof footer-->
+
+
+        </div><!--eof content-->
+        <!--extra page popup-->
+        <div data-role="popup" id="extrapopup" data-theme="a" class="ui-corner-all">
+            <form>
+                <div style="padding:10px 20px;">
+                    <h3>Extra</h3>
+                    <label for="un" class="ui-hidden-accessible">Description</label>
+                    <input name="user" id="un" value="" placeholder="description" data-theme="a" type="text">
+                    <label for="amount" class="ui-hidden-accessible">Amount</label>
+                    <input name="amount" id="pw" value="" placeholder="amount" data-theme="a" type="text">
+                    <label for="price" class="ui-hidden-accessible">Price</label>
+                    <input name="price" id="price" value="" placeholder="price" data-theme="a" type="text">
+                    <button type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">OK</button>
+                    <button type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-d ui-btn-icon-left ui-icon-delete">CANCEL</button>
+                </div>
+            </form>
+        </div>
+        <!--eof extra page popup-->
+    </div><!--eof mainpage-->
+
+
+    <div data-role="page" id="design-page">
+        <div data-role="header" style="border-bottom:4px solid #6292a8;background-color:#2b292c;">
+            <!--<a data-iconpos="notext" data-role="button" data-icon="phone" title="Home">Home</a>-->
+            <h1 style="margin:0 2%;color:#6292a8;text-align:left;">Button Assignment</h1>
+            <!--<a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>-->
+        </div>
+        <div data-role="content" style="padding:0;background-color:#000;color:#fff" id="mainbody" role="main">
+            <div style="padding:10px 0;" class="non-halfcenter center-wrapper">
+                <div class="secondblock-price" data-role="fieldcontain">
+                    <label for="name">Description:&nbsp; </label>
+                    <input type="text" name="description" id="description" value="" data-bind="value:Name, valueUpdate: 'keyup'" />
+                </div>
+                <div style="clear:both;"></div>
+
+                <div class="secondblock-price" style="padding-top:5px;" data-role="fieldcontain">
+                    <label for="name">Price:&nbsp; </label>
+                    <input type="text" name="price" id="price" value="" data-bind="value:Price, valueUpdate: 'keyup',numeric : name" />
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div class="ui-grid-c buttongroups">
+
+              <!--ko foreach:buttons-->    
+                  <div data-bind="attr:{ 'class' : $index() == 0 ? 'ui-block-a' : ( $index() == 1 ? 'ui-block-b' : ( $index() == 2 ? 'ui-block-c' : 'ui-block-d' ) )}">
+                    <button class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a" data-bind="attr:{ 'class' : Color},click:$parent.setColor">Button</button>       
+                  </div>   
+                  <!--/ko-->     
+              </div>
+            
+
+                
+                
+
+            </div><!-- /grid-b -->
+
+            <h1 class="center-wrapper ui-title" role="heading" style="margin-top:20px" aria-level="1">Preview</h1>
+
+            <div class="halfcenter center-wrapper">
+
+              <a style="padding-top:25px;padding-bottom:25px;" data-role="button" data-bind="attr:{ 'class' : Color()+' ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a'}" href="#" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" ><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text" data-bind="text:ButtonCaption">Button</span></span></a>
+
+         
+
+        
+
+            </div>
+            <div class="center-wrapper" style="padding:15px 10px;">
+                <p>To Delete Button Please Use LongKlick</p>
+            </div>
+            <div class="center-wrapper halfcenter">
+                <a class="btn-grey ui-btn-corner-all ui-btn-up-a ui-btn ui-shadow" data-theme="a" data-wrapperels="span" data-iconshadow="true" data-shadow="true" data-corners="true" href="index.html" data-role="button" role="button"><span class="ui-btn-inner ui-btn-corner-all"><span style="white-space:normal;" class="adjust-button ui-btn-text">Delete Button</span></span></a>
+            </div>
+
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a"><a data-role="button" href="index.html" data-bind="click:SaveButton" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Save</span></span></a></div>
+                <div class="ui-block-b"><a data-role="button" href="index.html" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Cancel</span></span></a></div>
+            </div>
+
+        </div><!--eof main body-->
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a" style="text-align: left;">
+                    <a data-role="button" data-transition="slide" data-rel="back" class="ui-block-a" data-icon="arrow-l" data-iconpos="notext" data-role="button">back</a>
+                </div>
+                <div class="ui-block-b" style="text-align: center;">
+                    <a href="index.html" class="ui-block-b" style="margin;left:30%" data-icon="refresh" data-iconpos="notext" data-role="button">refresh</a>
+                </div>
+                <div class="ui-block-c" style="text-align: right;"><a style="float:right" href="index.html" class="ui-block-c" data-icon="back" data-iconpos="notext right" data-role="button">Yes</a></div>
+            </div><!-- /grid-a -->
+
+        </div>
+    </div>
+
+
+      <div data-role="page" id="checkout-page">
+
+
+    
+
+        <div data-role="header" style="border-bottom:4px solid #418d9f;">
+            <a data-iconpos="notext" data-role="button" data-icon="phone" title="Home">Home</a>
+            <h1 style="margin:0 46px;text-align:left;">Summary</h1>
+            <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
+        </div>
+
+        <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">
+            <div data-role="fieldcontain" style="text-align:center" class="navigation-second">
+                Sales
+            </div>
+        </div>
+
+
+
+
+
+        <div data-role="content" style="padding:0" id="mainbody" role="main">
+
+
+            <div class="CSSTableGenerator">
+                <table summary="This table lists all the JetBlue flights.">
+
+                    <thead>
+                        <tr class="highlight">
+                            <td scope="col">Amount</td>
+                            <td scope="col">Description</td>
+                            <td scope="col">EP</td>
+                            <td scope="col">GP</td>
+                        </tr>
+                    </thead>
+                  
+                    <tbody data-bind="foreach:cart">
+                        <tr>
+                            <td data-bind="text:Quantity"></td>
+                            <td data-bind="text:Name"></td>
+                            <td data-bind="text:'$'+Price()"></td>
+                            <td data-bind="text:'$'+Total()"></td>
+                        </tr>
+                       
+
+                    </tbody>
+                      <tfoot>
+                        <tr class="highlight">
+                            <td colspan="3">To Pay</td>
+                            <td  data-bind="text:cartAmount" ></td>
+                        </tr>
+
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a"><button data-theme="f" data-bind="click:ConfirmDelete">Delete</button></div>
+                <div class="ui-block-b"><button data-theme="f">Print</button></div>
+                <div class="ui-block-c"><button data-ref="popup" id="checkoutbtn" data-theme="f">Money received</button></div>
+            </div>
+        </div>  <!--eof content-->
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+            <h6>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="text-align: left;">
+                        <a data-role="button" data-transition="slide" data-rel="back" class="ui-block-a" data-icon="arrow-l" data-iconpos="notext" data-role="button">back</a>
+                    </div>
+                    <div class="ui-block-b" style="text-align: center;">
+                        <a href="index.html" class="ui-block-b" style="margin; left: 30%" data-icon="refresh" data-iconpos="notext" data-role="button">refresh</a>
+                    </div>
+                    <div class="ui-block-c" style="text-align: right;"><a style="float: right" href="index.html" class="ui-block-c" data-icon="back" data-iconpos="notext right" data-role="button">Yes</a></div>
+                </div><!-- /grid-a -->
+            </h6>
+        </div>
+        <!--eof footer-->
+        <!--chckout page popup-->
+        <div data-position-to="window" data-role="popup" id="checkoutpopup" data-theme="a" class="ui-corner-all">
+            <form>
+                <div style="padding:10px 20px;">
+                    <h3>Change</h3>
+                    <label for="un" class="">To Pay: </label>$122.56
+
+                    <label for="un" class="ui-hidden-accessible">Cash Received</label>
+                    <input name="user" id="un" value="" placeholder="cash received" data-theme="a" type="text">
+                    <label for="amount" class="ui-hidden-accessible">Tip Received</label>
+                    <input name="amount" id="pw" value="" placeholder="Tip Received" data-theme="a" type="text">
+
+                    <label for="un" class="">Change: </label>$122.56
+                    <button type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">OK</button>
+                    <button type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-d ui-btn-icon-left ui-icon-delete">CANCEL</button>
+                    <button type="button" class="ui-btn ui-corner-all ui-shadow ui-btn-d ui-btn-icon-left ui-icon-check">Money Received</button>
+                </div>
+            </form>
+        </div>
+        <!--eof chckout popup-->
+    </div><!--eof page-->
+
+
+  <div id="myDialog" data-role="dialog">
+      <div id="myMessage"></div>
+      <input id="button1" type="button" value="Button 1" data-theme="b" />
+      <input id="button2" type="button" value="Button 2" data-theme="c"  />
+      </div>
+
+    <div id="highlight"> </div>
+   
+
+    <!--EOF application-->
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile.js"></script>
+    <script src="js/jquery.mobile.simpledialog.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/knockout-3.4.0.js"></script>
+    <script type="text/javascript" src="js/bindhandler.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+   
+    <script>
             $(function(){
                 //alert('ready');
-               
+
             //document.addEventListener("deviceready", onDeviceReady, true);
             $('button.extrabtn').on("click",function(){
                 $( "#extrapopup" ).popup( "open");
             });
 
 
-            $( ".buttonactions button" ).bind( "taphold", tapholdHandler ); 
+            $( ".buttonactions button").bind( "taphold", tapholdHandler );
             function tapholdHandler( event ){
             $.mobile.changePage( "buttons.html", { transition: "slideup", changeHash: false });
             //$( event.target ).addClass( "taphold" );
-            }            
+            }
 
 
 
-            //$.mobile.changePage( "buttons.html", { transition: "slideup", changeHash: false });  
+            //$.mobile.changePage( "buttons.html", { transition: "slideup", changeHash: false });
             var buttonHeight = $('#equal-buttonmain').outerHeight(true);
             //alert(buttonHeight);
             $('.equal-button').css('height', buttonHeight + 'px');
@@ -306,17 +364,17 @@
             $('#mainpage').click(function(){
                 $.mobile.changePage( "index.html", { transition: "slideup", changeHash: false });
             });
-            
+
 
             app.initialize();
-           
-            
+
+
 
             });
 
 
-        
 
-            </script>
-    </body>
+
+    </script>
+</body>
 </html>
