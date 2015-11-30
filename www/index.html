@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,7 +18,7 @@
     <!--application-->
     <div data-role="page" id="main-page">
 
-        <div data-role="header" style="border-bottom:4px solid #418d9f;">
+        <div data-role="header">
             <a data-iconpos="notext" data-role="button" data-icon="phone" title="Home">Home</a>
             <h1>Kasee</h1>
             <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
@@ -27,7 +27,7 @@
         <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">
             <div data-role="fieldcontain" class="navigation-second">
                 <div data-role="controlgroup" class="topsecond-btns" style="float:left;width:65%" data-type="horizontal">
-                    <a href="sales_statistics.html" data-role="button" data-transition="slide" class="ui-btnsmall" data-icon="calendar" data-iconpos="notext" data-role="button">Yes</a>
+                    <a href="#" data-bind="click:salesstatistic" data-role="button" data-transition="slide" class="ui-btnsmall" data-icon="calendar" data-iconpos="notext" data-role="button">Yes</a>
                     <a href="index.html" class="ui-btnsmall" data-icon="user" data-iconpos="notext" data-role="button">Yes</a>
                     <a href="index.html" class="ui-btnsmall" data-icon="info" data-iconpos="notext" data-role="button">Yes</a>
                     <a href="index.html" class="ui-btnsmall" data-icon="shop" data-iconpos="notext" data-role="button">Yes</a>
@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="ui-block-c">
-                    <button data-bind="popupCommand:{id :'extrapopup'}">Extra</button>
+                    <button data-native="true" class=" ui-btn ui-shadow ui-corner-all extra" data-bind="popupCommand:{id :'extrapopup'}">Extra</button>
 
                 </div>
 
@@ -79,9 +79,9 @@
 
 
             <div data-theme="a" data-role="footer" data-position="fixed">
-                <div style="background-color:#2e2e2e;border-bottom:4px solid #333333;">
+                <div style="background-color:#2e2e2e;">
 
-                    <a style="width:100%;" data-role="button" href="#" data-role="button" data-bind="click:next">
+                    <a style="width:100%;" data-role="button" href="#" data-bind="click:next">
                         <!--ko text:MoreCaption--><!--/ko-->
                     </a>
 
@@ -90,7 +90,7 @@
                 <h6>
                     <div class="ui-grid-b">
                         <div class="ui-block-a" style="text-align: left;">
-                            <a data-role="button" data-transition="slide" data-rel="back" class="ui-block-a" data-icon="arrow-l" data-iconpos="notext" data-rel="back" data-role="button">back</a>
+                            <a data-role="button" data-transition="slide" data-rel="back" class="ui-block-a" data-icon="arrow-l" data-iconpos="notext">back</a>
                         </div>
                         <div class="ui-block-b" style="text-align: center;">
                             <a href="index.html" class="ui-block-b" style="margin;left:30%" data-icon="refresh" data-iconpos="notext" data-role="button">refresh</a>
@@ -99,8 +99,9 @@
                             <a style="float:right" href="index.html" class="ui-block-c" data-icon="back" data-iconpos="notext right" data-role="button">Yes</a>
                         </div>
                     </div><!-- /grid-a -->
-                </h6>
+
             </div><!--eof footer-->
+        </h6>
 
 
         </div><!--eof content-->
@@ -213,7 +214,7 @@
                     <label for="un" class="ui-hidden-accessible">Cash Received</label>
                     <input name="user" id="un" value="" placeholder="cash received" data-theme="a" type="text" data-bind="value:CashReceived,valueUpdate: 'afterkeydown',numeric:name">
                     <label for="amount" class="ui-hidden-accessible">Tip Received</label>
-                    <input name="amount" id="pw" value="" placeholder="Tip Received" data-theme="a" type="text" data-bind="value:TipReceived,valueUpdate: 'afterkeydown',numeric:name">
+                    <input name="amount" id="amount" value="" placeholder="Tip Received" data-theme="a" type="text" data-bind="value:TipReceived,valueUpdate: 'afterkeydown',numeric:name">
 
                     <label for="un" class="">Change: </label><!--ko text:Change--><!--/ko-->
 
@@ -226,7 +227,7 @@
         <!--eof chckout popup-->
 
 
-        <div data-role="header" style="border-bottom:4px solid #418d9f;">
+        <div data-role="header" >
             <a data-iconpos="notext" data-role="button" data-icon="phone" title="Home">Home</a>
             <h1 style="margin:0 46px;text-align:left;">Summary</h1>
             <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
@@ -302,7 +303,79 @@
 
     </div><!--eof page-->
 
+    <div data-role="page" id="sale-statistic-page">
+        <div data-role="header">
+            <a data-iconpos="notext" data-role="button" data-icon="phone" title="Home">Home</a>
+            <h1 style="margin:0 46px;text-align:left;">Sales Statistics</h1>
+            <a data-iconpos="notext" href="#panel" data-role="button" data-icon="flat-menu"></a>
+        </div>
 
+        <div data-role="header" style="background-color:#2e2e2e;border-bottom:4px solid #333333;">
+            <div data-role="fieldcontain" style="text-align:center" class="navigation-second">
+                18.11.2015 to 20.11-2015
+            </div>
+        </div>
+
+
+
+        <div data-role="content" style="padding:0" id="mainbody" role="main">
+
+            <div class="CSSTableGenerator">
+                <table summary="This table lists all the JetBlue flights.">
+
+                    <thead>
+                        <tr class="highlight">
+                            <th scope="col">Amount</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">EP</th>
+                            <th scope="col">GP</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr class="highlight">
+                            <td colspan="3">Current money in cash desk</td>
+                            <td data-bind="text:totalSalesAmount"></td>
+                        </tr>
+                        <tr class="highlight">
+                            <td style="border-bottom:none;border-right:1px solid #000;" colspan="3">Tip received</td>
+                            <td  data-bind="text:'$'+totalTips()"></td>
+                        </tr>
+                    </tfoot>
+                    <tbody data-bind="foreach:totalSales">
+                        <tr>
+                            <td data-bind="text:Quantity"></td>
+                            <td data-bind="text:Name"></td>
+                            <td data-bind="text:'$'+Price"></td>
+                            <td data-bind="text:'$'+(Price * Quantity)"></td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a"><button data-theme="f">Delete</button></div>
+                <div class="ui-block-b"><button data-theme="f">Export</button></div>
+                <div class="ui-block-c"><button data-theme="f">Cancel</button></div>
+            </div>
+        </div>  <!--eof content-->
+
+        <div data-theme="a" data-role="footer" data-position="fixed">
+
+            <h6>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="text-align: left;">
+                        <a href="index.html" data-role="button" data-transition="slide" data-rel="back" class="ui-block-a" data-icon="arrow-l" data-iconpos="notext" data-role="button">back</a>
+                    </div>
+                    <div class="ui-block-b" style="text-align: center;">
+                        <a href="index.html" class="ui-block-b" style="margin;left:30%" data-icon="refresh" data-iconpos="notext" data-role="button">refresh</a>
+                    </div>
+                    <div class="ui-block-c" style="text-align: right;"><a style="float:right" href="index.html" class="ui-block-c" data-icon="back" data-iconpos="notext right" data-role="button">Yes</a></div>
+                </div><!-- /grid-a -->
+            </h6>
+        </div>
+        <!--eof footer-->
+    </div><!--eof page-->      
 
     <div id="highlight"> </div>
 

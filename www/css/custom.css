@@ -221,3 +221,7 @@ height:30px!important;width:30px!important;}
 }
 
 .error{background: rgba(234, 0, 0, 0.12)!important;}
+
+[class*="ui-block-"] > div.ui-btn{ border-radius: 0;margin: 0;padding: 0;border: none;}
+div.ui-btn{padding: 0;background: transparent!important;border: 0;}
+div.ui-btn button.ui-btn{margin: 0}
