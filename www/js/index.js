@@ -64,6 +64,7 @@ var app = {
     },
 
     populateDB: function(tx) {
+         tx.executeSql('DROP TABLE IF EXISTS BUTTONCOLORS');
          //SALES
          /*tx.executeSql('DROP TABLE IF EXISTS SALES');
          tx.executeSql('DROP TABLE IF EXISTS CHECKOUT');
@@ -78,7 +79,7 @@ var app = {
          tx.executeSql('CREATE TABLE IF NOT EXISTS CHECKOUT (id unique,date,amountpaid,tips)');
          //BUTTONCOLORS
          
-         tx.executeSql('CREATE TABLE IF NOT EXISTS BUTTONCOLORS (id unique,color)');
+         tx.executeSql('CREATE TABLE IF NOT EXISTS BUTTONCOLORS (id unique,color,btnclass)');
          
          //ITEMS
          
@@ -101,12 +102,14 @@ var app = {
         }
         //insert colors
         var colors=["#3e80bd","#515151","#15ab16","#bf0f11","#d4d12a","#c7893c","#e66d04","#c42cf9"];
+        var btnclass=["btn-blue","btn-grey","btn-green","btn-red","btn-yellow","btn-cream","btn-orange","btn-violet"];
         for (var i=0; i<colors.length; i++){
-            tx.executeSql('INSERT INTO BUTTONCOLORS (id, color) VALUES ('+(i+1)+', "'+colors[i]+'")');
-        }
+            tx.executeSql('INSERT INTO BUTTONCOLORS (id, color, btnclass) VALUES ('+(i+1)+', "'+colors[i]+', "'+btnclass[i]+'")');
+        }btn-blue
+
+        
 
     }
-
     app.loadButtons(len,results);
 
 },
@@ -116,7 +119,7 @@ var app = {
         console.log("ITEMS table: " + len + " rows found.");
         for (var i=0; i<len; i++){
             //alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).number);
-            //alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).color);
+            alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).color);
         }
     },
     // Transaction error callback
