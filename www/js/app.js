@@ -3,15 +3,27 @@ var CheckOutViewModel = function(cart){
 	var self = this;
 	self.cart = ko.observableArray([]);
 	self.cartAmount = ko.observable();
+	self.CashReceived = ko.observable();
+	self.TipReceived= ko.observable();
+	self.Change= ko.computed(function(){
+		var cartAmount  = parseFloat(self.cartAmount()== undefined ? 0.00 : self.cartAmount().replace("$","") || 0.00);
+		return '$' + (parseFloat(self.CashReceived() || 0)  - (cartAmount  + parseFloat(self.TipReceived() || 0))).toFixed(2);
+	});
+	self.MoneyReceived =function(){
 
-	self.ConfirmDelete = function(){
-		alert()
-    	$.mobile.changePage("#myDialog");
-    }
-    self.clearCart=function(){
+	}
+
+	
+    self.ClearCart=function(){
     	self.cart([])
-    	$.mobile.changePage( "#checkout-page", { transition: "slideup", changeHash: false });
+    	mainViewModel.cart([])
+    	self.cartAmount(null);
+    	$('#dialogDeleteCart').popup('close');    	
+        
     }
+
+
+   
 
 }
 
@@ -33,26 +45,56 @@ var DesignViewModel = function(){
 	var self = this;
 	self.SelectedButton =ko.observable();
 	self.buttons = ko.observableArray([]);
-	self.Name = ko.observable('Button');
+	self.Name = ko.observable('Button').extend({required : true});
 	self.Color = ko.observable('btn-blue');
-	self.Price =ko.observable('');
+	self.Price =ko.observable('').extend({required : true});
 	self.ButtonCaption = ko.computed(function(){
 	return self.Name() +(self.Price() != '' ? " ($" +self.Price() +")" : '');
 	})
+
+	self.reset = function(){
+		self.Name('Button');
+		self.Color('btn-blue');
+		self.Price('');
+	}
 
 	self.setColor = function(entity){
 
 		self.Color(entity.Color());
 	}
 
+	self.isModelValid = function () {
+        var result = ko.validation.group(self, { deep: true, observable: false });
+
+        if (!self.isValid()) {           
+            result.showAllMessages(true);
+            return false;
+        }
+        return true;
+    };
+
 	
 	self.SaveButton = function(){
 
-	self.SelectedButton().Name(self.Name());
-	self.SelectedButton().Price(self.Price());
-	self.SelectedButton().ButtonClass(self.Color());
-	self.SelectedButton().IsSale(true);
-	$.mobile.changePage( "#main-page", { transition: "slideup", changeHash: false });
+		$.when(self.isModelValid()).then(function (result) {
+
+			if (result) {
+
+				self.SelectedButton().Name(self.Name());
+				self.SelectedButton().Price(self.Price());
+				self.SelectedButton().ButtonClass(self.Color() + " ui-btn ui-btn-f ui-shadow ui-corner-all");
+				self.SelectedButton().IsSale(true);
+				self.reset();
+				$.mobile.changePage( "#main-page", { transition: "slide", changeHash: true });
+
+
+			}
+
+		});
+
+
+
+	
 
 
 
@@ -105,13 +147,30 @@ var ButtonViewModel = function(data){
 var CartViewModel = function(data){
 
 	var self = this;
-	self.Id= ko.observable();
-	self.Price = ko.observable();
-	self.Quantity= ko.observable();
-	self.Name = ko.observable();
+	self.Id= ko.observable(0);
+	self.Price = ko.observable().extend({required :true});
+	self.Quantity= ko.observable().extend({required :true});
+	self.Name = ko.observable().extend({required :true});
 	self.Total = ko.computed(function(){
 		return (parseFloat(self.Price()) * parseFloat(self.Quantity())).toFixed(2);
 	})
+
+	self.reset = function(){
+		self.Id(0);
+		self.Price('');
+		self.Quantity('');
+		self.Name('');
+	}
+
+	self.isModelValid = function () {
+        var result = ko.validation.group(self, { deep: true, observable: false });
+
+        if (!self.isValid()) {           
+            result.showAllMessages(true);
+            return false;
+        }
+        return true;
+    };
 
 	if(data){
 		self.Id(data.Id);
@@ -126,6 +185,17 @@ var MainViewModel = function(){
 	var self = this;
 	self.salesButtons = ko.observableArray([]);
 	self.cart= ko.observableArray([]);
+	self._extraSale = ko.observable();
+	self.showFirst = ko.observable(true);
+	self.MoreCaption = ko.computed(function(){
+
+		return self.showFirst() ? "Next" : "Previous";
+	})
+
+	self.next = function(){
+
+		self.showFirst(!self.showFirst());
+	}
 	self.cartAmount = ko.computed(function(){
 
 		if(self.cart().length  == 0)
@@ -163,7 +233,36 @@ var MainViewModel = function(){
 
     	checkoutViewModel.cart(self.cart());
     	checkoutViewModel.cartAmount(self.cartAmount());    	
-    	$.mobile.changePage( "#checkout-page", { transition: "slideup", changeHash: false });
+    	$.mobile.changePage( "#checkout-page", { transition: "slide", changeHash: true });
+
+    }
+
+    self.addExtraSales = function(){
+
+    	if(self._extraSale().isModelValid()){
+
+    		var id = 0;
+			ko.utils.arrayForEach(self.cart(),function(item){
+
+				if(id > item.Id())
+					id = item.Id();
+			
+			});
+
+			if(id == 0 ||  id < 25)
+				id = 25;
+			else
+				id = id + 1;
+
+			self._extraSale().Id(id);
+			self.cart.push(new CartViewModel({Id : self._extraSale().Id(),Price : self._extraSale().Price(),Name : self._extraSale().Name(), Quantity : self._extraSale().Quantity()}))
+			self._extraSale().reset();
+
+			$("#extrapopup").popup("close");
+
+    	}
+
+    	
 
     }
 
@@ -188,7 +287,7 @@ var MainViewModel = function(){
     	else{
 
     	designViewModel.SelectedButton(entity); 
-    	$.mobile.changePage( "#design-page", { transition: "slideup", changeHash: false });
+    	$.mobile.changePage( "#design-page", { transition: "slide", changeHash: true });
     	}
     }
 
@@ -203,6 +302,7 @@ var MainViewModel = function(){
 			buttons.push(new ButtonViewModel(item));
 		});
 		self.salesButtons(buttons);
+		self._extraSale(new CartViewModel());
 
 
 

@@ -39,6 +39,7 @@
 .adduser a.ui-icon-user::after {left:42%!important;top:42%!important;background-image:url("./images/adduser.png")!important;
 background-size:30px!important;
 height:30px!important;width:30px!important;}
+.bigbtn button{height: 83px;}
 .userdetail span{
     display: inline-block;
     font-size: 1em;
@@ -49,35 +50,36 @@ height:30px!important;width:30px!important;}
     text-overflow: ellipsis;
     white-space: nowrap;
     float:left!important;text-align:left!important;padding-left:10px;}
+    .ui-grid-b.bigbtn button{border-right: none!important;border-bottom: none!important}
 
 /* buttons css */
 .btn-blue{background: #3e80bd none repeat scroll 0 0!important;
-    border-color: #3e80bd!important;
+    border-color: #4C8DC9!important;
     color: #fff;}
 	.btn-grey{background: #515151 none repeat scroll 0 0!important;
-    border-color: #515151!important;
+    border-color: #8E8B8B!important;
     color: #fff;}
 	.btn-green{background: #15ab16 none repeat scroll 0 0!important;
-    border-color: #15ab16!important;
+    border-color: #63DA66!important;
     color: #fff;}
 	.btn-red{background: #bf0f11 none repeat scroll 0 0!important;
-    border-color: #bf0f11!important;
+    border-color: #EB9A9A!important;
     color: #fff;}
 	
 	.btn-yellow{background: #d4d12a none repeat scroll 0 0!important;
-    border-color: ##d4d12a!important;
+    border: 1px solid #fffe81 !important;
     color: #fff;}
 	
 	.btn-cream{background: #c7893c none repeat scroll 0 0!important;
-    border-color: #c7893c!important;
+    border-color: #E8B675!important;
     color: #fff;}
 	
 	.btn-orange{background: #e66d04 none repeat scroll 0 0!important;
-    border-color: #e66d04!important;
+    border-color: #FFBC82!important;
     color: #fff;}
 	
 	.btn-violet{background: #c42cf9 none repeat scroll 0 0!important;
-    border-color: #c42cf9!important;
+    border-color: #D991F2!important;
     color: #fff;}
 	
 	.buttongroups div{background-color:#222629;border:1px solid #060709;}
@@ -170,15 +172,15 @@ height:30px!important;width:30px!important;}
   
 }
 .CSSTableGenerator tr:nth-child(odd){ background-color:#8fadd3; }
-.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
-  vertical-align:middle;
-  
+.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }
+.CSSTableGenerator td{
+  vertical-align:middle; 
   
   border:1px solid #000000;
   border-width:0px 1px 1px 0px;
   text-align:left;
-  padding:7px;
-  font-size:10px;
+  padding:15px;
+  font-size:13px;
   font-family:Arial;
   font-weight:normal;
   color:#000000;
@@ -196,7 +198,7 @@ height:30px!important;width:30px!important;}
 
   background-color:#616161;
   border:0px solid #000000;
-  text-align:center;
+  text-align:left;
   border-width:0px 0px 1px 1px;
   font-size:14px;
   font-family:Arial;
@@ -217,3 +219,5 @@ height:30px!important;width:30px!important;}
 .CSSTableGenerator tr:first-child td:last-child{
   border-width:0px 0px 1px 1px;
 }
+
+.error{background: rgba(234, 0, 0, 0.12)!important;}
