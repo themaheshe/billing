@@ -105,7 +105,7 @@ var app = {
         var btnclass=["btn-blue","btn-grey","btn-green","btn-red","btn-yellow","btn-cream","btn-orange","btn-violet"];
         for (var i=0; i<colors.length; i++){
             tx.executeSql('INSERT INTO BUTTONCOLORS (id, color, btnclass) VALUES ('+(i+1)+', "'+colors[i]+', "'+btnclass[i]+'")');
-        }btn-blue
+        }
 
         
 

@@ -99,10 +99,25 @@ var DesignViewModel = function(){
 
 
 	}
-	
-	self.init = function(){
 
-		var rows =[
+	self.bindButtons = function(tx, results) {
+    alert(results.rows);
+   
+
+    
+
+}
+
+	self.ErrDb = function(err) {
+        alert("Error processing SQL: "+err.message);
+    }
+
+		self.listButtonColors = function()
+		{
+			var db = window.openDatabase("billing", "1.0", "Kasee Billing", 200000);
+            db.transaction(app.populateDB, app.errorCB, app.successCB);  
+            tx.executeSql('SELECT * FROM BUTTONCOLORS', [], self.bindButtons, self.ErrDb);  
+		return [
 		"btn-blue",
 		"btn-grey",
 		"btn-green",
@@ -110,7 +125,12 @@ var DesignViewModel = function(){
 		"btn-yellow",
 		"btn-cream",
 		"btn-orange",
-		"btn-violet"],buttons =[];
+		"btn-violet"];
+		}
+	
+	self.init = function(){
+        
+		var rows = self.listButtonColors(),buttons =[];
 
 		ko.utils.arrayForEach(rows,function(item){
 			buttons.push(new ButtonColorViewModel(item));
@@ -124,6 +144,8 @@ var DesignViewModel = function(){
 	self.init();
 
 }
+
+ 
 
 
 
