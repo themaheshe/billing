@@ -8,11 +8,15 @@ var SalesStatisticViewModel = function () {
     var self = this;
     self.totalSales = ko.observableArray([]);
     self.totalTips = ko.observable();
+<<<<<<< HEAD
     self.Range = ko.observable('');
+=======
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
     self.totalSalesAmount = ko.computed(function () {
         var totalAmount = 0;
 
+<<<<<<< HEAD
         ko.utils.arrayForEach(self.totalSales(), function (item) {
             totalAmount += (parseFloat(item.Price()) * parseInt(item.Quantity()));
         });
@@ -114,11 +118,30 @@ var CheckOutViewModel = function (cart) {
 
         });
 
+=======
+        ko.utils.arrayForEach(self.totalSales(), function(item) {
+
+            totalAmount += (parseFloat(item.Price) * parseFloat(item.Quantity));
+        });
+
+        return '$' + totalAmount.toFixed(2);
+    });
+
+    self.init = function () {
+
+        self.totalSales([{ Id: 1, Name: "Cake", Price: 20, Quantity: 10 },
+            { Id: 2, Name: "Cake I", Price: 30, Quantity: 4 },
+            { Id: 3, Name: "Cake II", Price: 40, Quantity: 2 },
+        { Id: 4, Name: "Cake III", Price: 40, Quantity: 2 },
+        { Id: 5, Name: "Cake IV", Price: 40, Quantity: 2 }]);
+        self.totalTips(200);
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
     }
 }
 
 var ButtonColorViewModel = function (data) {
 
+<<<<<<< HEAD
     var self = this;
     self.Color = ko.observable('');
     self.Id = ko.observable('');
@@ -128,9 +151,34 @@ var ButtonColorViewModel = function (data) {
         self.Id(data.Id);
 
     }
+=======
 
+
+var CheckOutViewModel = function (cart) {
+    var self = this;
+    self.cart = ko.observableArray([]);
+    self.cartAmount = ko.observable();
+    self.CashReceived = ko.observable();
+    self.TipReceived = ko.observable();
+    self.Change = ko.computed(function () {
+        var cartAmount = parseFloat(self.cartAmount() == undefined ? 0.00 : self.cartAmount().replace("$", "") || 0.00);
+        return '$' + (parseFloat(self.CashReceived() || 0) - (cartAmount + parseFloat(self.TipReceived() || 0))).toFixed(2);
+    });
+
+    self.MoneyReceived = function () {
+
+    }
+    self.ClearCart = function () {
+        self.cart([])
+        mainViewModel.cart([])
+        self.cartAmount(null);
+        $('#dialogDeleteCart').popup('close');
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
+
+    }
 }
 
+<<<<<<< HEAD
 var DesignViewModel = function () {
 
     var self = this;
@@ -156,6 +204,41 @@ var DesignViewModel = function () {
 
     self.setColor = function (entity) {
         self.Id(entity.Id());
+=======
+
+var ButtonColorViewModel = function (data) {
+
+    var self = this;
+    self.Color = ko.observable('');
+
+    if (data) {
+        self.Color(data);
+
+    }
+
+}
+
+var DesignViewModel = function () {
+
+    var self = this;
+    self.SelectedButton = ko.observable();
+    self.buttons = ko.observableArray([]);
+    self.Name = ko.observable('Button').extend({ required: true });
+    self.Color = ko.observable('btn-blue');
+    self.Price = ko.observable('').extend({ required: true });
+    self.ButtonCaption = ko.computed(function () {
+        return self.Name() + (self.Price() != '' ? " ($" + self.Price() + ")" : '');
+    })
+
+    self.reset = function () {
+        self.Name('Button');
+        self.Color('btn-blue');
+        self.Price('');
+    }
+
+    self.setColor = function (entity) {
+
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
         self.Color(entity.Color());
     }
 
@@ -169,6 +252,7 @@ var DesignViewModel = function () {
         return true;
     };
 
+<<<<<<< HEAD
     self.afterSave = function () {
 
         self.SelectedButton().Name(self.Name());
@@ -188,6 +272,27 @@ var DesignViewModel = function () {
             if (result) {
 
                 _dbase.transaction(function (tx) {
+=======
+
+    self.SaveButton = function () {
+
+        $.when(self.isModelValid()).then(function (result) {
+
+            if (result) {
+
+                self.SelectedButton().Name(self.Name());
+                self.SelectedButton().Price(self.Price());
+                self.SelectedButton().ButtonClass(self.Color() + " ui-btn ui-btn-f ui-shadow ui-corner-all");
+                self.SelectedButton().IsSale(true);
+                self.reset();
+                $.mobile.changePage("#main-page", { transition: "slide", changeHash: true });
+
+
+            }
+
+        });
+
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
                     var sql = 'UPDATE ITEMS SET buttoncolorid=?,description=?,price=? where id=?;';
                     tx.executeSql(sql, [self.Color(), self.Name(), self.Price(), self.SelectedButton().Id()], self.afterSave, function () { });
@@ -198,15 +303,42 @@ var DesignViewModel = function () {
 
                 }, function (error) {
 
+<<<<<<< HEAD
                 });
 
 
+=======
+    }
+
+    self.init = function () {
+
+        var rows = [
+		"btn-blue",
+		"btn-grey",
+		"btn-green",
+		"btn-red",
+		"btn-yellow",
+		"btn-cream",
+		"btn-orange",
+		"btn-violet"], buttons = [];
+
+        ko.utils.arrayForEach(rows, function (item) {
+            buttons.push(new ButtonColorViewModel(item));
+        });
+        self.buttons(buttons);
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
 
             }
 
+<<<<<<< HEAD
         });
 
+=======
+    }
+
+    self.init();
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
     }
 
@@ -225,6 +357,7 @@ var DesignViewModel = function () {
             },
             function () { alert(); });
 
+<<<<<<< HEAD
 
     }
 
@@ -287,6 +420,45 @@ var CartViewModel = function (data) {
 
     self.isModelValid = function () {
         var result = ko.validation.group(self, { deep: true, observable: false });
+=======
+var ButtonViewModel = function (data) {
+    var self = this;
+    self.Id = ko.observable();
+    self.Name = ko.observable('');
+    self.Price = ko.observable('');
+    self.ButtonClass = ko.observable("btn-blue");
+    self.IsSale = ko.observable(false);
+    self.ButtonCaption = ko.computed(function () {
+        return self.Name() + (self.Price() != '' ? " ($" + self.Price() + ")" : '');
+    })
+    if (data) {
+        self.Id(data.Id);
+    }
+
+}
+
+var CartViewModel = function (data) {
+
+    var self = this;
+    self.Id = ko.observable(0);
+    self.Price = ko.observable().extend({ required: true });
+    self.Quantity = ko.observable().extend({ required: true });
+    self.Name = ko.observable().extend({ required: true });
+    self.Total = ko.computed(function () {
+        return (parseFloat(self.Price()) * parseFloat(self.Quantity())).toFixed(2);
+    })
+
+    self.reset = function () {
+        self.Id(0);
+        self.Price('');
+        self.Quantity('');
+        self.Name('');
+    }
+
+    self.isModelValid = function () {
+        var result = ko.validation.group(self, { deep: true, observable: false });
+
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
         if (!self.isValid()) {
             result.showAllMessages(true);
             return false;
@@ -299,7 +471,10 @@ var CartViewModel = function (data) {
         self.Price(data.Price);
         self.Quantity(data.Quantity);
         self.Name(data.Name);
+<<<<<<< HEAD
         self.IsExtra(data.IsExtra != undefined);
+=======
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
     }
 }
 
@@ -311,8 +486,21 @@ var MainViewModel = function () {
     self.showFirst = ko.observable(true);
     self.MoreCaption = ko.computed(function () {
 
+<<<<<<< HEAD
         return self.showFirst() ? "Next" : "Previous";
     });
+=======
+var MainViewModel = function () {
+    var self = this;
+    self.salesButtons = ko.observableArray([]);
+    self.cart = ko.observableArray([]);
+    self._extraSale = ko.observable();
+    self.showFirst = ko.observable(true);
+    self.MoreCaption = ko.computed(function () {
+
+        return self.showFirst() ? "Next" : "Previous";
+    })
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
     self.next = function () {
 
@@ -327,7 +515,11 @@ var MainViewModel = function () {
 
         ko.utils.arrayForEach(self.cart(), function (item) {
             total += parseFloat(item.Total());
+<<<<<<< HEAD
         });
+=======
+        })
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
         return '$' + parseFloat(total).toFixed(2);
 
@@ -351,6 +543,7 @@ var MainViewModel = function () {
     });
 
     self.checkOut = function () {
+<<<<<<< HEAD
 
         checkoutViewModel.cart(self.cart());
         checkoutViewModel.cartAmount(self.cartAmount());
@@ -480,6 +673,41 @@ var MainViewModel = function () {
                 }));
 
             }
+=======
+
+        checkoutViewModel.cart(self.cart());
+        checkoutViewModel.cartAmount(self.cartAmount());
+        $.mobile.changePage("#checkout-page", { transition: "slide", changeHash: true });
+
+    }
+
+    self.addExtraSales = function () {
+
+        if (self._extraSale().isModelValid()) {
+
+            var id = 0;
+            ko.utils.arrayForEach(self.cart(), function (item) {
+
+                if (id > item.Id())
+                    id = item.Id();
+
+            });
+
+            if (id == 0 || id < 25)
+                id = 25;
+            else
+                id = id + 1;
+
+            self._extraSale().Id(id);
+            self.cart.push(new CartViewModel({ Id: self._extraSale().Id(), Price: self._extraSale().Price(), Name: self._extraSale().Name(), Quantity: self._extraSale().Quantity() }))
+            self._extraSale().reset();
+
+            $("#extrapopup").popup("close");
+
+        }
+
+
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
             buttons.push(row);
         }
@@ -491,6 +719,7 @@ var MainViewModel = function () {
     }
 
 
+<<<<<<< HEAD
     self.init = function () {
 
         _dbase.transaction(function (tx) {
@@ -520,6 +749,44 @@ var MainViewModel = function () {
 
             var fromDate = sqlRecordset.rows.item(0).sale_date,toDate = sqlRecordset.rows.item(sqlRecordset.rows.length - 1).sale_date;
 
+=======
+
+    self.addItem = function (entity) {
+
+        if (entity.IsSale()) {
+            var existingButton = ko.utils.arrayFirst(self.cart(), function (item) {
+                return item.Id() == entity.Id()
+            });
+
+            if (existingButton != null)
+                existingButton.Quantity(existingButton.Quantity() + 1);
+            else
+                self.cart.push(new CartViewModel({ Id: entity.Id(), Price: entity.Price(), Name: entity.Name(), Quantity: 1 }))
+
+
+
+
+        }
+        else {
+
+            designViewModel.SelectedButton(entity);
+            $.mobile.changePage("#design-page", { transition: "slide", changeHash: true });
+        }
+    }
+
+
+    self.init = function () {
+
+        var rows = [{ Id: 1 }, { Id: 2 }, { Id: 3 }, { Id: 4 }, { Id: 5 }, { Id: 6 }, { Id: 7 }, { Id: 8 }, { Id: 9 }, { Id: 10 },
+					{ Id: 11 }, { Id: 12 }, { Id: 13 }, { Id: 14 }, { Id: 15 }, { Id: 16 }, { Id: 17 }, { Id: 18 }, { Id: 19 }, { Id: 20 },
+					{ Id: 21 }, { Id: 22 }, { Id: 23 }, { Id: 24 }], buttons = [];
+
+        ko.utils.arrayForEach(rows, function (item) {
+            buttons.push(new ButtonViewModel(item));
+        });
+        self.salesButtons(buttons);
+        self._extraSale(new CartViewModel());
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
             range = fromDate.split(' ')[0] + ' - ' + toDate.split(' ')[0];
 
@@ -531,6 +798,7 @@ var MainViewModel = function () {
 
                 var id = parseInt(sqlRecordset.rows.item(k).id);
 
+<<<<<<< HEAD
                 if (saleIds.indexOf(id) === -1) {
                     saleIds.push(id);
                     tips += parseFloat(sqlRecordset.rows.item(k).tips || 0);
@@ -556,10 +824,13 @@ var MainViewModel = function () {
       
 
 
+=======
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
     }
 
     self.salesstatistic = function () {
 
+<<<<<<< HEAD
         _dbase = window.openDatabase("billing", "1.0", "Kasee Billing", 200000);
         _dbase.transaction(function (tx) {
             tx.executeSql('SELECT * FROM SALEDETAIL sd INNER JOIN SALE s on s.id = sd.sale_id order by sale_date ', [], self.pickSales, function (s) {
@@ -576,6 +847,15 @@ var MainViewModel = function () {
     }
     self.init();
 
+=======
+        $.when(salesStatisticViewModel.init()).then(function () {
+            $.mobile.changePage("#sale-statistic-page", { transition: "slide", changeHash: true });
+        });
+
+    }
+
+    self.init();
+>>>>>>> 2cb9b4b94a184f8f668546d016069ca3ac2020d9
 
 
 
