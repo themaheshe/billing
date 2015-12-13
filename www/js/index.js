@@ -19,119 +19,91 @@
 
 var app = {
     // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
+    initialize: function () {
+        document.addEventListener('deviceready', function () {
+            
+            _dbase = window.openDatabase("billing", "1.0", "Kasee Billing", 200000);
+            _dbase.transaction(app.populateDB, app.errorCB, app.successCB);
 
-    test: function(){
-        alert("success!");
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {        
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        //app.receivedEvent('deviceready');
-        app.createDatabase();
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-         
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+        }, false);
 
     },
+    populateDB: function (tx) {
+       
+        //tx.executeSql('DROP TABLE IF EXISTS BUTTONCOLORS'); 
+       // tx.executeSql('DROP TABLE IF EXISTS SALE');
+     // tx.executeSql('DROP TABLE IF EXISTS SALEDETAIL');
+      
+        tx.executeSql('CREATE TABLE IF NOT EXISTS SALE(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,sale_date DATETIME,amountpaid REAL,tips REAL)');
+        //BUTTONCOLORS
 
-
-    createDatabase: function()
-    {
-        var db = window.openDatabase("billing", "1.0", "Kasee Billing", 200000);
-        db.transaction(app.populateDB, app.errorCB, app.successCB);        
-
-    },
-
-    populateDB: function(tx) {
-         tx.executeSql('DROP TABLE IF EXISTS BUTTONCOLORS');
-         //SALES
-         /*tx.executeSql('DROP TABLE IF EXISTS SALES');
-         tx.executeSql('DROP TABLE IF EXISTS CHECKOUT');
-         tx.executeSql('DROP TABLE IF EXISTS BUTTONCOLORS');
-         tx.executeSql('DROP TABLE IF EXISTS ITEMS');
-         tx.executeSql('DROP TABLE IF EXISTS EXTRA');
-         */
-
-         tx.executeSql('CREATE TABLE IF NOT EXISTS SALES (id unique, itemid,date,ispaid,checkoutid,isextra)');
-         //CHECKOUT
-         
-         tx.executeSql('CREATE TABLE IF NOT EXISTS CHECKOUT (id unique,date,amountpaid,tips)');
-         //BUTTONCOLORS
-         
-         tx.executeSql('CREATE TABLE IF NOT EXISTS BUTTONCOLORS (id unique,color,btnclass)');
-         
-         //ITEMS
-         
-         tx.executeSql('CREATE TABLE IF NOT EXISTS ITEMS (id unique,number,buttoncolorid,price,description)');
-         //extra
-         
-         tx.executeSql('CREATE TABLE IF NOT EXISTS EXTRA (id unique,description,price,quantity,date)');
-         //query result
-         //tx.executeSql('SELECT * FROM ITEMS', [], app.querySuccess, app.errorCB);
-         tx.executeSql('SELECT * FROM BUTTONCOLORS', [], app.querySuccess, app.errorCB);
-
-    },
-
-    querySuccess:function(tx, results) {
-    var len = results.rows.length;
-    //alert(len);
-    if(len==0){    
-         for (var i=1; i<=24; i++){
-           tx.executeSql('INSERT INTO ITEMS (id, number) VALUES ('+i+', "'+i+'")');       
-        }
-        //insert colors
-        var colors=["#3e80bd","#515151","#15ab16","#bf0f11","#d4d12a","#c7893c","#e66d04","#c42cf9"];
-        var btnclass=["btn-blue","btn-grey","btn-green","btn-red","btn-yellow","btn-cream","btn-orange","btn-violet"];
-        for (var i=0; i<colors.length; i++){
-            tx.executeSql('INSERT INTO BUTTONCOLORS (id, color, btnclass) VALUES ('+(i+1)+', "'+colors[i]+', "'+btnclass[i]+'")');
-        }
-
+        tx.executeSql('CREATE TABLE IF NOT EXISTS SALEDETAIL(sale_id INTEGER NOT NULL,itemid INTEGER NOT NULL ,quantity INTEGER NOT NULL,price real ,description NULL)');
+        //CHECKOUT
         
+        tx.executeSql('CREATE TABLE IF NOT EXISTS CART (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,itemid INTEGER NOT NULL ,quantity INTEGER NOT NULL,price real ,cartdate,isextra INTEGER NOT NULL,description NULL)');
+        //BUTTONCOLORS
+    
+       tx.executeSql('CREATE TABLE IF NOT EXISTS BUTTONCOLORS (id unique,color,btnclass)');
+        //ITEMS
 
-    }
-    app.loadButtons(len,results);
+        tx.executeSql('CREATE TABLE IF NOT EXISTS ITEMS (id unique,number,buttoncolorid,price,description)');
+        //extra
 
-},
+        tx.executeSql('CREATE TABLE IF NOT EXISTS EXTRA (id unique,description,price,quantity,date)');
+        //query result
+        //tx.executeSql('SELECT * FROM ITEMS', [], app.querySuccess, app.errorCB);
+        tx.executeSql('SELECT * FROM BUTTONCOLORS', [], app.querySuccess, app.errorCB);
 
-    loadButtons: function(len,results)
-    {
-        console.log("ITEMS table: " + len + " rows found.");
-        for (var i=0; i<len; i++){
-            //alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).number);
-            alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).color);
-        }
+
+      
+      
+
     },
+
+    querySuccess: function (tx, results) {
+
+       //alert(len);
+        if (results.rows.length == 0) {
+
+
+
+            for (var i = 1; i <= 24; i++) {
+                tx.executeSql('INSERT INTO ITEMS (id, number) VALUES (' + i + ', "' + i + '")');
+            }
+
+            //insert colors
+            var colors = ["#3e80bd", "#515151", "#15ab16", "#bf0f11", "#d4d12a", "#c7893c", "#e66d04", "#c42cf9"];
+
+            var btnclass = ["btn-blue", "btn-grey", "btn-green", "btn-red", "btn-yellow", "btn-cream", "btn-orange", "btn-violet"];
+            for (var j = 0; j < colors.length; j++) {
+
+                var sql = 'INSERT INTO BUTTONCOLORS (id, color, btnclass) VALUES (' + (j + 1) + ', "' + colors[j] + '", "' + btnclass[j] + '")';
+               
+                tx.executeSql(sql);
+
+
+            }
+
+
+
+
+
+        }
+
+
+
+    },
+
     // Transaction error callback
     //
-    errorCB: function(err) {
-        alert("Error processing SQL: "+err.message);
+    errorCB: function (err) {
+        alert("Error processing SQL: " + err.message);
     },
 
     // Transaction success callback
     //
-    successCB: function() {
-        //alert("success!");
+    successCB: function () {
+       // alert("success!");
     }
 
 
